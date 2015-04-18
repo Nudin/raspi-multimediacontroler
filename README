@@ -1,0 +1,16 @@
+
+== Dependencies (Debian) ==
+- libgtk-3-0
+- python3-gi
+- gir1.2-gtk-3.0
+
+== known Bugs / ToDo ==
+-Main window icons zentrieren
+
+Traceback (most recent call last):
+  File "/home/pi/ContenChooser.py", line 94, in playbuttonclicked
+    selection = self.get_selection()
+  File "/home/pi/ContenChooser.py", line 77, in get_selection
+    self.playing_tree_iter = model.get_iter(pathlist[0])
+IndexError: list index out of range
+
