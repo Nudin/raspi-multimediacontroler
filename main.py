@@ -46,11 +46,12 @@ class waitforexit(threading.Thread):
     
     def run(self):
         self.pro.wait()
-        if self.pro.returncode == 0:
-            pro = subprocess.Popen("./clear.sh", stdout=subprocess.PIPE,shell=True, preexec_fn=os.setsid)
+        print(self.pro.returncode)
+        if self.pro.returncode >= 0:
+            clear_pro = subprocess.Popen("./clear.sh", stdout=subprocess.PIPE,shell=True, preexec_fn=os.setsid)
         debug("Playback finished")
         self.statusQueue.put("stoped")
-        win2.stopped()
+        win2.stopped(self.pro.returncode)
 
 
 class video(threading.Thread):
@@ -78,24 +79,25 @@ class video(threading.Thread):
     def play(self, contenttype, filename):
         if contenttype == "video":
             player=videoplayer
-            pro = subprocess.Popen("./blackscreen", stdout=subprocess.PIPE, shell=True, preexec_fn=os.setsid)
+            clear_pro = subprocess.Popen("./blackscreen", stdout=subprocess.PIPE, shell=True, preexec_fn=os.setsid)
         else:
             player=imageplayer
-        self.pro = subprocess.Popen(player+" '"+filename+"'", stdout=subprocess.PIPE, 
+        self.pro = subprocess.Popen("trap 'exit -15' EXIT;"+ player+" '"+filename+"'", stdout=subprocess.PIPE, 
                        shell=True, preexec_fn=os.setsid)
         self.statusQueue.put("started")
         waiter = waitforexit(self.pro, self.statusQueue)
         waiter.start()
     
-    def stop(self, mode):
-        if bool(mode):
-          pro = subprocess.Popen("./clear.sh", stdout=subprocess.PIPE,shell=True, preexec_fn=os.setsid)
+    def stop(self):
         if self.pro:
           if self.pro.poll() != 0:
             try:
-              os.killpg(self.pro.pid, signal.SIGTERM)
+              os.killpg(self.pro.pid, signal.SIGTERM)	# Why not pro.kill()?
             except:
               True
+    
+    def clear(self):
+        clear_pro = subprocess.Popen("./clear.sh", stdout=subprocess.PIPE,shell=True, preexec_fn=os.setsid)
 
 
 class MainWindow(Gtk.Window):
@@ -162,7 +164,7 @@ class MainWindow(Gtk.Window):
 videoThread = video(commandQueue, statusQueue)
 videoThread.start()
 
-pro = subprocess.Popen("./clear.sh", stdout=subprocess.PIPE,shell=True, preexec_fn=os.setsid)
+subprocess.Popen("./clear.sh", stdout=subprocess.PIPE,shell=True, preexec_fn=os.setsid)
 
 while run:
  win = MainWindow()

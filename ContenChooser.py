@@ -119,7 +119,8 @@ class ContenChooser(Gtk.Window):
     # Stop playing
     # this function is called by the stop-button
     def stopbuttonclicked(self, button):
-        self.stop(True)
+        self.stop()
+        self.commandQueue.put("clear()")
         
     # exit the window
     def exit(self, button):
@@ -131,7 +132,7 @@ class ContenChooser(Gtk.Window):
     # Play the given element
     def play(self, selection):
         # Stop old playback
-        self.stop(False)
+        self.stop()
         # Start new playback
         self.commandQueue.put("play('"+self.contenttype+"', '"+self.dir+selection+"')")
         time.sleep(0.5)
@@ -141,18 +142,18 @@ class ContenChooser(Gtk.Window):
         self.statuslabel.set_label("Playing: "+selection)
     
     # Stop playing
-    def stop(self, mode):
-        self.stoppedmanuell = mode
-        self.commandQueue.put("stop(" + str(mode) + ")")
+    def stop(self):
+        self.commandQueue.put("stop()")
         while not self.statusQueue.empty():
             val = self.statusQueue.get()
             debug("Outputting: " + val)
     
     # Set label back and if autoplay is enabled, start playing nex video
     # this function is called after the video/slideshow has been stoped
-    def stopped(self):
+    def stopped(self, returncode):
+        debug("stopped() " + str(self.stoppedmanuell))
         self.statuslabel.set_label("Please choose")
-        if (not self.stoppedmanuell) and self.autoplay.get_active():
+        if (returncode >= 0) and self.autoplay.get_active():
             self.play(self.getnext())
 
 
