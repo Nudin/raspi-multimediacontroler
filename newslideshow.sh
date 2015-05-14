@@ -1,7 +1,7 @@
 #!/bin/bash
 
 timetosleep=$1
-cd $2
+cd "$2"
 
 resolution=$(fbset -s -fb /dev/fb0 | grep ^mode | cut -d\" -f2)
 
@@ -11,7 +11,7 @@ for i in *jpg; do
    # best:        -rescale
    # in between:  -scale
    # fast:        -sample
-   convert -sample $resolution -gravity center -background black -extent $resolution $i - | \
+   convert -sample $resolution -gravity center -background black -extent $resolution "$i" - | \
    stream -map bgra -extract $resolution -virtual-pixel black -storage-type char jpg:- /dev/shm/pic.dat &
    
    if [[ $first -eq 1 ]] ; then
