@@ -6,7 +6,7 @@ cd "$2"
 resolution=$(fbset -s -fb /dev/fb0 | grep ^mode | cut -d\" -f2)
 
 first=1
-for i in *jpg; do
+for i in *jpg *JPG *jpeg *JPEG; do
    # Note: Convert has different resizing techniques
    # best:        -rescale
    # in between:  -scale
