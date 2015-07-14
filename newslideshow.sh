@@ -1,7 +1,17 @@
 #!/bin/bash
 
+if [ $# -ne 2 ] ; then
+	echo "Wrong usage of $0" 1>&2
+	exit
+fi
 timetosleep=$1
-cd "$2"
+
+if [ -d  $2 ] ; then
+	cd "$2"
+else
+	echo "Wrong usage of $0" 1>&2
+	exit
+fi
 
 resolution=$(fbset -s -fb /dev/fb0 | grep ^mode | cut -d\" -f2)
 
