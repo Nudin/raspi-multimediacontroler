@@ -1,5 +1,9 @@
 
 == Dependencies (Debian) ==
+- X11
+- python3
+- fbset
+- imagemagick
 - libgtk-3-0
 - python3-gi
 - gir1.2-gtk-3.0
