@@ -12,6 +12,8 @@ convert_image() {
 show_image() {
 	cp /dev/shm/pic.dat /dev/fb0
 }
+IFS='
+'
 
 if [ $# -ne 2 ] ; then
 	echo "Wrong usage of $0" 1>&2
@@ -23,11 +25,11 @@ timetosleep=$1
 resolution=$(fbset -s -fb /dev/fb0 | grep ^mode | cut -d\" -f2)
 echo $resolution
 
-if [ -d  $2 ] ; then
+if [ -d "$2" ] ; then
 	cd "$2"
-elif [ -f $2 ]; then
+elif [ -f "$2" ]; then
 	# singleimage function
-	convert_image $2 $resolution
+	convert_image "$2" "$resolution"
 	show_image
 	sleep infinity
 else
@@ -38,7 +40,7 @@ fi
 
 first=1
 for file in *jpg *JPG *jpeg *JPEG; do
-   convert_image $file $resolution &
+   convert_image "$file" "$resolution" &
 
    if [[ $first -eq 1 ]] ; then
      first=0
