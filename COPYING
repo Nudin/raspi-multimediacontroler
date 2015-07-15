@@ -1,0 +1,24 @@
+All Source Code
+	raspi-multimediacontroler
+	https://github.com/Nudin/raspi-multimediacontroler
+	Copyright Michael F. Schönitzer
+	License GNU GENERAL PUBLIC LICENSE Version 3 (GPLv3)
+		see LICENSE.GPLv3
+
+video.png
+back.png
+media-playback-start.png
+media-playback-stop.png
+system.png
+	adwaita-icon-theme
+	https://git.gnome.org/browse/adwaita-icon-theme/
+	Copyright GNOME icon artists (https://git.gnome.org/browse/adwaita-icon-theme/tree/AUTHORS)
+	License: Creative Commons Attribution-Share Alike 3.0 Unported
+		see https://creativecommons.org/licenses/by-sa/3.0/deed.en
+
+image.png
+	Gion
+	http://www.silvestre.com.ar/
+	Copyright Silvestre Herrera
+	License GNU GENERAL PUBLIC LICENSE Version 2 (GPLv2)
+		see LICENSE.GPLv2
