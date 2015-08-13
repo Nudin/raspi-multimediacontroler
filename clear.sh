@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cp clear.dat /dev/fb0
+cp /dev/shm/clear.dat /dev/fb0
