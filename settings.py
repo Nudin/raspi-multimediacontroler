@@ -1,9 +1,9 @@
 
 # Player-software
-#videoplayer = "omxplayer -b"
-videoplayer = "mpv"
-#imageplayer = "./newslideshow.sh 4"
-imageplayer = "eom"
+videoplayer = "omxplayer -b"
+#videoplayer = "mpv"
+imageplayer = "./newslideshow.sh 4"
+#imageplayer = "eom"
 
 # Contentfolder
 videodir="./Videos/"
