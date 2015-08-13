@@ -169,7 +169,7 @@ subprocess.Popen("./clear.sh", stdout=subprocess.PIPE,shell=True, preexec_fn=os.
 while run:
  win = MainWindow()
  if play_on_start_type:
-    commandQueue.put("play('" + play_on_start_type: + "', '" + play_on_start_file + "')")
+    commandQueue.put("play('" + play_on_start_type + "', '" + play_on_start_file + "')")
  win.show_all()
  Gtk.main()
 
