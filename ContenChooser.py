@@ -76,6 +76,7 @@ class ContenChooser(Gtk.Window):
         self.statuslabel = Gtk.Label("Please choose")
         
         self.autoplay = Gtk.CheckButton("autoplay")
+	self.autoplay.set_active(autoplay_default)
         
         self.grid.attach_next_to(self.playbutton,
                                self.scrollwindow, Gtk.PositionType.BOTTOM, 1, 1)
