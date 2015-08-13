@@ -6,8 +6,8 @@ imageplayer = "./newslideshow.sh 4"
 #imageplayer = "eom"
 
 # Contentfolder
-videodir="./Videos/"
-photodir="./Photos/"
+videodir="/boot/MEDIA/Videos/"
+photodir="/boot/MEDIA/Photos/"
 
 # Design
 gtktheme="Clearlooks"
